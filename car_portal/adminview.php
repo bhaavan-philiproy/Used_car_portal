@@ -2,7 +2,7 @@
     $con=mysqli_connect("localhost","root","","project");
     if(isset($_GET['id'])){
         $id=$_GET['id'];
-        $sql="select * from cardetails inner join carportal on cardetails.Uid = carportal.Id where cardetails.Status='Unsold'";
+        $sql="select * from cardetails where Uid='$id' and Status='Unsold'";
         $result=mysqli_query($con,$sql);
         $row=mysqli_fetch_all($result);
     }
@@ -17,8 +17,6 @@
     <title>Admin View</title>
 </head>
 <link rel="stylesheet" href="adminview.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="custom.js" ></script>
 <body>
     <div class="container">
         <header><center>Car Details</center></header>
@@ -34,8 +32,6 @@
             <p><?php echo $data[6]?></p>
             <p><?php echo $data[8]?></p>
             <p><?php echo $data[9]?></p>
-            <p>Name:&nbsp; &nbsp;<?php echo $data[12]?></p>
-            <a href="" onclick="removecar(<?php echo $data[0] ?>,<?php echo $id ?>)">Delete</a>
         </div>
         <?php
             }

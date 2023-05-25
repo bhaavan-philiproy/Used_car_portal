@@ -2,7 +2,7 @@
     $con=mysqli_connect("localhost","root","","project");
     if(isset($_GET['id'])){
         $id=$_GET['id'];
-        $sql="select * from cardetails inner join carportal on cardetails.Uid = carportal.Id where cardetails.Status='Unsold'";
+        $sql="select * from cardetails where Uid='$id' and Status='Sold'";
         $result=mysqli_query($con,$sql);
         $row=mysqli_fetch_all($result);
     }
@@ -34,8 +34,7 @@
             <p><?php echo $data[6]?></p>
             <p><?php echo $data[8]?></p>
             <p><?php echo $data[9]?></p>
-            <p>Name:&nbsp; &nbsp;<?php echo $data[12]?></p>
-            <a href="" onclick="removecar(<?php echo $data[0] ?>,<?php echo $id ?>)">Delete</a>
+            <a href="" onclick="removecar(<?php echo $data[0] ?>,<?php echo $id ?>)">Remove</a>
         </div>
         <?php
             }

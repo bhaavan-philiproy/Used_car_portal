@@ -2,9 +2,12 @@
     $con=mysqli_connect("localhost","root","","project");
     if(isset($_GET['id'])){
         $id=$_GET['id'];
-        $sql="select * from cardetails inner join carportal on cardetails.Uid = carportal.Id where cardetails.Status='Unsold'";
+        $sql="select * from cardetails where Uid='$id' and Status='Unsold'";
         $result=mysqli_query($con,$sql);
         $row=mysqli_fetch_all($result);
+    }
+    if(isset($_POST['Sold'])){
+        header("Location: /car-portal/adminpg.php?id=".$id);
     }
 ?>
 
@@ -34,8 +37,12 @@
             <p><?php echo $data[6]?></p>
             <p><?php echo $data[8]?></p>
             <p><?php echo $data[9]?></p>
-            <p>Name:&nbsp; &nbsp;<?php echo $data[12]?></p>
-            <a href="" onclick="removecar(<?php echo $data[0] ?>,<?php echo $id ?>)">Delete</a>
+            <a href="" onclick="removecar(<?php echo $data[0] ?>,<?php echo $id ?>)">Remove</a>
+            <form method="post" action="<?php $_SERVER['PHP_SELF']?>">
+                <div class="input-field button">
+                    <input type="submit" name="Sold" value="Sold Car" />
+                </div>
+            </form>
         </div>
         <?php
             }
